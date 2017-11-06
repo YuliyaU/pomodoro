@@ -1,0 +1,62 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-size: 20px;
+    color: #fff;
+    background-color: #6200EA;
+}
+
+div, h1 {
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #fff;
+}
+
+div {
+    padding: 1.0rem;
+    color: #B39DDB;
+}
+
+button {
+    font-size: 2.0rem;
+    color: #fff;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#timer {
+    font-size: 6.0rem;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 960px;
+    height: 100%;
+    /* display: flex;
+    flex-direction: column; 
+    justify-content: space-around; */
+    margin: 0 auto;
+}
+
+.row {
+    width: 100%;
+    overflow: hidden;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.col-6 {
+    width: 50%;
+    float: left;
+}
+
+.settings-display {
+    font-size: 2.0rem;
+}
