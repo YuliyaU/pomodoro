@@ -3,12 +3,13 @@ html, body {
 }
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     color: #fff;
     background-color: #6200EA;
 }
 
-div, h1 {
+div, h1, h2, button {
     box-sizing: border-box;
 }
 
@@ -16,21 +17,20 @@ h1 {
     color: #fff;
 }
 
+h2 {
+    font-size: 1.0rem;
+}
+
 div {
-    padding: 1.0rem;
-    color: #B39DDB;
+    padding: 1.0rem;    
 }
 
 button {
+    padding: 1.0rem;
     font-size: 2.0rem;
     color: #fff;
     border: none;
     background-color: transparent;
-    cursor: pointer;
-}
-
-#timer {
-    font-size: 6.0rem;
     cursor: pointer;
 }
 
@@ -57,6 +57,40 @@ button {
     float: left;
 }
 
+.settings-display, .timer {
+    color: #B39DDB;
+} 
+
 .settings-display {
     font-size: 2.0rem;
 }
+
+.timer {
+    font-size: 6.0rem;
+    cursor: pointer;
+}
+
+@media all and (max-width: 600px) {
+
+    body {
+        font-size: 15px;
+    }  
+
+    div {
+        padding: 0.5rem 0;
+    }
+
+    button {
+        padding: 1.0rem 0.5rem;
+        font-size: 1.5rem;
+    }
+
+    .settings-display {
+        font-size: 1.3rem;
+    }
+    
+    .timer {
+        font-size: 3.0rem;
+        cursor: pointer;
+    }
+} 
