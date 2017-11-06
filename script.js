@@ -32,12 +32,16 @@ function onMinusBtnClick(pomodoro) {
     for (var i = 0; i < minusBtns.length; i += 1) {
         minusBtns[i].addEventListener('click', function (event) {
             if (event.target.parentNode.id === 'working-time-settings') {
-                pomodoro.workingTime -= 1 * 60;
-                pomodoro.currentTime = pomodoro.workingTime;
-                displayTime(pomodoro);
+                if (pomodoro.workingTime > 0) {
+                    pomodoro.workingTime -= 1 * 60;
+                    pomodoro.currentTime = pomodoro.workingTime;
+                    displayTime(pomodoro);
+                }                
             } else {
-                pomodoro.restTime -= 1 * 60;
-                displayTime(pomodoro);
+                if (pomodoro.restTime > 0) {
+                    pomodoro.restTime -= 1 * 60;
+                    displayTime(pomodoro);
+                }                
             }
         });
     }
