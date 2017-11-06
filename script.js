@@ -8,7 +8,7 @@ function displayTime(pomodoro) {
     restTimeDisplay.innerHTML = pomodoro.restTime + ' min';
 
     var timer = document.getElementById('timer');
-    timer.innerHTML = pomodoro.workingTime + ' min';
+    timer.innerHTML = pomodoro.currentTime + ' min';  
 }
 
 function onPlusBtnClick(pomodoro) {
@@ -17,6 +17,7 @@ function onPlusBtnClick(pomodoro) {
         plusBtns[i].addEventListener('click', function (event) {
             if (event.target.parentNode.id === 'working-time-settings') {
                 pomodoro.workingTime += 1;
+                pomodoro.currentTime = pomodoro.workingTime;
                 displayTime(pomodoro);
             } else {
                 pomodoro.restTime += 1;
@@ -32,6 +33,7 @@ function onMinusBtnClick(pomodoro) {
         minusBtns[i].addEventListener('click', function (event) {
             if (event.target.parentNode.id === 'working-time-settings') {
                 pomodoro.workingTime -= 1;
+                pomodoro.currentTime = pomodoro.workingTime;
                 displayTime(pomodoro);
             } else {
                 pomodoro.restTime -= 1;
@@ -41,14 +43,48 @@ function onMinusBtnClick(pomodoro) {
     }
 }
 
+function onTimerClick(pomodoro) {
+    var timer = document.getElementById('timer');
+    var intervalId;
+    timer.onclick = function (event) {
+        console.log('Test start'); // Test  
+        if (pomodoro.isRunning) {
+            clearInterval(intervalId);
+        } else {                
+            intervalId = setInterval(function () {                      
+                if (pomodoro.currentTime > 1) {
+                    pomodoro.currentTime -= 1;
+                    console.log('currentTime ' + pomodoro.currentTime); 
+                    var timer = document.getElementById('timer');
+                    timer.innerHTML = pomodoro.currentTime + ' min';
+                } else {
+                    pomodoro.isWorkingTime = !pomodoro.isWorkingTime;
+                    if (pomodoro.isWorkingTime) {                    
+                        pomodoro.currentTime = pomodoro.workingTime;
+                        timer.innerHTML = pomodoro.currentTime + ' min';
+                    } else {                    
+                        pomodoro.currentTime = pomodoro.restTime;
+                        timer.innerHTML = pomodoro.currentTime + ' min';
+                    } 
+                }
+            }, 1000);    
+        }   
+        pomodoro.isRunning = !pomodoro.isRunning;
+        console.log('isRunning ' + pomodoro.isRunning); // Test            
+    };
+}
+
 window.onload = function () {
     var pomodoro = {
         workingTime: 25,
         restTime: 5,
+        currentTime: 0,
         isWorkingTime: true,
         isRunning: false
     };
+    pomodoro.currentTime = pomodoro.workingTime;
     displayTime(pomodoro);
     onPlusBtnClick(pomodoro);
     onMinusBtnClick(pomodoro);
+    onTimerClick(pomodoro);
 };
