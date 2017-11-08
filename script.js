@@ -51,14 +51,12 @@ function onTimerClick(pomodoro) {
     var timer = document.getElementById('timer');
     var intervalId;
     timer.onclick = function (event) {
-        console.log('Test start'); // Test  
         if (pomodoro.isRunning) {
             clearInterval(intervalId);
         } else {                
             intervalId = setInterval(function () {                      
                 if (pomodoro.currentTime > 1) {
                     pomodoro.currentTime -= 1;
-                    console.log('currentTime ' + pomodoro.currentTime); 
                     timer.innerHTML = parseTime(pomodoro.currentTime);
                 } else {
                     pomodoro.isWorkingTime = !pomodoro.isWorkingTime;
@@ -68,12 +66,12 @@ function onTimerClick(pomodoro) {
                     } else {                    
                         pomodoro.currentTime = pomodoro.restTime;
                         timer.innerHTML = parseTime(0);
-                    } 
+                    }
+                    launchAlert();
                 }
             }, 1000);    
         }   
-        pomodoro.isRunning = !pomodoro.isRunning;
-        console.log('isRunning ' + pomodoro.isRunning); // Test            
+        pomodoro.isRunning = !pomodoro.isRunning;          
     };
 }
 
@@ -89,7 +87,12 @@ function parseTime(seconds) {
     }
     return `${hours} : ${minutes} : ${seconds}`
 }
- 
+
+function launchAlert() {
+    var audioEl = document.getElementById('alert-sound');
+    audioEl.play();
+}
+
 window.onload = function () {
     var pomodoro = {
         workingTime: convertToSeconds(25),
